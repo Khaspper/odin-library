@@ -1,4 +1,6 @@
 const myLibrary = [];
+const addBookButton = document.querySelector('.add-book-button');
+const dialog = document.querySelector('dialog')
 
 function Book(title, author, numPages, read) {
   this.title = title;
@@ -44,3 +46,9 @@ function addBookToLibrary(title, author, numPages, read) {
 // addBookToLibrary("The amazing spider-man", "Stan Lee", "200", "true");
 // addBookToLibrary("Poopy", "Stan Lee", "200", "true");
 // addBookToLibrary("Gangsters say whaaaaat?", "Stan Lee", "50", "false");
+
+// console.log(addBookButton)
+
+addBookButton.addEventListener('click', function() {
+  dialog.showModal();
+});

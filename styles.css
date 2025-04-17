@@ -70,3 +70,8 @@ body {
   justify-self: center;
   align-self: center;
 }
+
+.add-book-button {
+  outline: auto red;
+  font-size: 3rem;
+}
