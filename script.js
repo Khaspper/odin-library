@@ -1,23 +1,46 @@
 const myLibrary = [];
 
-function Book(name, author, numPages, read) {
-  this.name = name;
+function Book(title, author, numPages, read) {
+  this.title = title;
   this.author = author;
   this.numPages = numPages;
   this.read = read;
   this.uniqueID = crypto.randomUUID();
 }
 
-function addBookToLibrary(name, author, numPages, read) {
-  const newBook = new Book(name, author, numPages, read);
+function renderBook(newBook) {
+  const bookDisplay = document.createElement("div");
+  const bookTitle = document.createElement("h2");
+  const bookAuthor = document.createElement("h4");
+  const bookRead = document.createElement("p");
+  const numOfPages = document.createElement("p");
+
+  bookTitle.classList.add('book-title')
+  bookAuthor.classList.add('book-author')
+  bookRead.classList.add('book-read')
+  numOfPages.classList.add('book-num-of-pages')
+  bookDisplay.classList.add('book-display')
+
+  bookTitle.textContent = newBook.title;
+  bookAuthor.textContent = newBook.author;
+  bookRead.textContent = newBook.read;
+  numOfPages.textContent = newBook.numPages;
+
+  bookDisplay.appendChild(bookTitle);
+  bookDisplay.appendChild(bookAuthor);
+  bookDisplay.appendChild(bookRead);
+  bookDisplay.appendChild(numOfPages);
+  bookDisplay.classList.add(newBook.uniqueID);
+
+  document.body.appendChild(bookDisplay);
+}
+
+function addBookToLibrary(title, author, numPages, read) {
+  const newBook = new Book(title, author, numPages, read);
   myLibrary.push(newBook);
-  renderLibrary();
+  renderBook(newBook);
 }
 
-function renderLibrary() {
-  
-}
-
-addBookToLibrary("The amazing spider-man", "Stan Lee", 200, true);
-addBookToLibrary("Poopy", "Stan Lee", 200, true);
-addBookToLibrary("Gangsters say whaaaaat?", "Stan Lee", 50, false);
+// addBookToLibrary("The amazing spider-man", "Stan Lee", "200", "true");
+// addBookToLibrary("Poopy", "Stan Lee", "200", "true");
+// addBookToLibrary("Gangsters say whaaaaat?", "Stan Lee", "50", "false");
