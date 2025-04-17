@@ -4,10 +4,6 @@ html {
   font-size: 16px;
 }
 
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
 body, h1, h2, h3, h4, h5, h6, p, ol, ul {
   margin: 0;
   padding: 0;
@@ -24,3 +20,53 @@ img {
 }
 
 /* My own styles */
+
+body {
+  outline: auto red;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: start;
+  flex-wrap: wrap;
+}
+
+.book-display {
+  background-color: gray;
+  color: white;
+  width: clamp(150px, 20vw, 200px);
+  height: clamp(250px, 26vw, 300px);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 3fr 1fr 1fr;
+  grid-template-areas: 
+  "book-title book-title"
+  "book-author book-author"
+  "book-read book-num-of-pages";
+  margin: 10px;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.book-title {
+  grid-area: book-title;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.book-author {
+  grid-area: book-author;
+}
+
+.book-read {
+  grid-area: book-read;
+}
+
+.book-num-of-pages {
+  grid-area: book-num-of-pages;
+}
+
+.book-author,
+.book-read,
+.book-num-of-pages {
+  justify-self: center;
+  align-self: center;
+}
