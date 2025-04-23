@@ -1,6 +1,8 @@
 const myLibrary = [];
 const addBookButton = document.querySelector('.add-book-button');
 const dialog = document.querySelector('dialog')
+const submitForm = document.querySelector('.submit-form');
+const form = document.querySelector('form');
 
 function Book(title, author, numPages, read) {
   this.title = title;
@@ -51,4 +53,26 @@ function addBookToLibrary(title, author, numPages, read) {
 
 addBookButton.addEventListener('click', function() {
   dialog.showModal();
+});
+
+submitForm.addEventListener('click', function(event) {
+  const input_book_name = document.querySelector('input[id="book_name"]');
+  const input_author_name = document.querySelector('input[id="author_name"]');
+  const input_number = document.querySelector('input[id="num_of_pages"]');
+  const input_read = document.querySelector('input[type="radio"]:checked');
+
+  console.log(input_book_name.value);
+  console.log(input_author_name.value);
+  console.log(input_number.value);
+  console.log(input_read.value);
+
+  addBookToLibrary(
+    input_book_name.value, 
+    input_author_name.value, 
+    input_number.value, 
+    input_read.value);
+
+  event.preventDefault();
+  form.reset();
+  dialog.close();
 });

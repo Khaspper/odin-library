@@ -75,3 +75,9 @@ body {
   outline: auto red;
   font-size: 3rem;
 }
+
+.form-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
