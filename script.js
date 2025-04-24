@@ -34,7 +34,7 @@ function renderBook(newBook) {
   bookDisplay.appendChild(bookAuthor);
   bookDisplay.appendChild(bookRead);
   bookDisplay.appendChild(numOfPages);
-  bookDisplay.classList.add(newBook.uniqueID);
+  bookDisplay.setAttribute("data-unique-ID", newBook.uniqueID);
 
   document.body.appendChild(bookDisplay);
 }
@@ -76,3 +76,10 @@ submitForm.addEventListener('click', function(event) {
   form.reset();
   dialog.close();
 });
+
+//TODO: I need to use event delegation to get the book we are trying to delete
+//TODO: Then I need to use event.target.data-unique-ID (I do not know if this is the right syntax)
+//TODO: Then use a for loop that loops through the library array and finds the object with the specific data-unique-ID
+//TODO: To do the above we need to use spilce because it modifies the original array
+//TODO: While using the for loop we would need to keep track of the array index so we can use it in splice
+//TODO: Somewhere in here we need to delete it from the DOM
