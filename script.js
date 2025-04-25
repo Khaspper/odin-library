@@ -13,14 +13,20 @@ function Book(title, author, numPages, read) {
   this.uniqueID = crypto.randomUUID();
 }
 
+Book.prototype.changeReadStatus = function() {
+  this.read = !this.read;
+};
+
 function renderBook(newBook) {
   const bookDisplay = document.createElement("div");
   const bookTitle = document.createElement("h2");
   const bookAuthor = document.createElement("h4");
-  const bookRead = document.createElement("p");
+  const bookRead = document.createElement("button");
   const numOfPages = document.createElement("p");
   const deleteButton = document.createElement("button");
 
+  // By default the button's type is 'submit' so we have to change it to just button
+  bookRead.type = "button";
 
   bookTitle.classList.add('book-title');
   bookAuthor.classList.add('book-author');
@@ -28,10 +34,17 @@ function renderBook(newBook) {
   numOfPages.classList.add('book-num-of-pages');
   bookDisplay.classList.add('book-display');
   deleteButton.classList.add('delete-book-button');
+  if (newBook.read === true) {
+    bookRead.classList.add('has-read');
+    bookRead.textContent = "Read";
+  }
+  else {
+    bookRead.classList.add('not-read');
+    bookRead.textContent = "Not Read";
+  }
 
-  bookTitle.textContent = newBook.title;
   bookAuthor.textContent = newBook.author;
-  bookRead.textContent = newBook.read;
+  bookTitle.textContent = newBook.title;
   numOfPages.textContent = newBook.numPages;
   deleteButton.textContent = 'Delete Book';
 
@@ -63,13 +76,15 @@ submitForm.addEventListener('click', function(event) {
   const input_book_name = document.querySelector('input[id="book_name"]');
   const input_author_name = document.querySelector('input[id="author_name"]');
   const input_number = document.querySelector('input[id="num_of_pages"]');
-  const input_read = document.querySelector('input[type="radio"]:checked');
+  const input_read = document.querySelector('input[type="checkbox"]');
+
+  console.log(input_read.checked)
 
   addBookToLibrary(
     input_book_name.value, 
     input_author_name.value, 
     input_number.value, 
-    input_read.value);
+    input_read.checked);
 
   event.preventDefault();
   form.reset();
@@ -83,18 +98,41 @@ submitForm.addEventListener('click', function(event) {
 // First deletes it in the dom then in the `myLibrary` array
 
 document.body.addEventListener('click', function(event) {
+    console.log(event);
     if (event.target.matches(".delete-book-button")) {
       const divId = event.target.parentNode.dataset.uniqueId;
       const deleteElement = document.querySelector(`[data-unique-id="${divId}"]`);
       deleteElement.remove();
-      let index = 0;
-      for (index; index < myLibrary.length; index++) {
+      for (let index = 0; index < myLibrary.length; index++) {
         if (divId === myLibrary[index].uniqueID) {
           myLibrary.splice(index, 1);
           break;
         }
       }
     }
+    else if (event.target.matches(".book-read")) {
+      const divId = event.target.parentNode.dataset.uniqueId;
+      for (let index = 0; index < myLibrary.length; index++) {
+        if (divId === myLibrary[index].uniqueID) {
+          const book = myLibrary[index];
+          console.log(book);
+          book.changeReadStatus();
+          if (book.read === true) {
+            event.target.classList.remove('not-read');
+            event.target.classList.add('has-read');
+            event.target.textContent = "Read";
+          }
+          else {
+            event.target.classList.remove('has-read');
+            event.target.classList.add('not-read');
+            event.target.textContent = "Not Read";
+          }
+          console.log(book);
+          break;
+        }
+      }
+    }
+
 });
 
 

@@ -69,6 +69,7 @@ body {
 
 .book-read {
   grid-area: book-read;
+  border: none;
 }
 
 .book-num-of-pages {
@@ -76,7 +77,6 @@ body {
 }
 
 .book-author,
-.book-read,
 .book-num-of-pages {
   justify-self: center;
   align-self: center;
@@ -91,4 +91,16 @@ body {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
+}
+
+#read {
+  justify-self: start;
+}
+
+.has-read {
+  background-color: green;
+}
+
+.not-read {
+  background-color: yellow;
 }
