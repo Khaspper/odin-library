@@ -79,7 +79,9 @@ submitForm.addEventListener('click', function(event) {
 // // TODO: I need to use event delegation to get the book we are trying to delete
 //? First I need to add the listener to the body
 
-// Finds the div in the 
+// Finds the book that needs to be deleted
+// First deletes it in the dom then in the `myLibrary` array
+
 document.body.addEventListener('click', function(event) {
     if (event.target.matches(".delete-book-button")) {
       const divId = event.target.parentNode.dataset.uniqueId;
