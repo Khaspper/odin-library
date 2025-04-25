@@ -37,22 +37,29 @@ body {
   height: clamp(250px, 26vw, 300px);
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 3fr 1fr 1fr;
+  grid-template-rows: 3fr 1fr 1fr 1fr;
   grid-template-areas: 
   "book-title book-title"
   "book-author book-author"
-  "book-read book-num-of-pages";
+  "book-num-of-pages book-num-of-pages"
+  "book-read delete-book-button";
   margin: 10px;
   padding: 15px;
   border-radius: 10px;
 }
 
+.delete-book-button {
+  grid-area: delete-book-button;
+}
+
 .book-title {
+  word-breaK:break-all;
   grid-area: book-title;
   font-size: clamp(1.5rem, 3vw, 2rem);
 }
 
 .book-author {
+  word-breaK: break-all;
   grid-area: book-author;
 }
 

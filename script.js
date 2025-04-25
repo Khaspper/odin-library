@@ -18,22 +18,27 @@ function renderBook(newBook) {
   const bookAuthor = document.createElement("h4");
   const bookRead = document.createElement("p");
   const numOfPages = document.createElement("p");
+  const deleteButton = document.createElement("button");
 
-  bookTitle.classList.add('book-title')
-  bookAuthor.classList.add('book-author')
-  bookRead.classList.add('book-read')
-  numOfPages.classList.add('book-num-of-pages')
-  bookDisplay.classList.add('book-display')
+
+  bookTitle.classList.add('book-title');
+  bookAuthor.classList.add('book-author');
+  bookRead.classList.add('book-read');
+  numOfPages.classList.add('book-num-of-pages');
+  bookDisplay.classList.add('book-display');
+  deleteButton.classList.add('delete-book-button');
 
   bookTitle.textContent = newBook.title;
   bookAuthor.textContent = newBook.author;
   bookRead.textContent = newBook.read;
   numOfPages.textContent = newBook.numPages;
+  deleteButton.textContent = 'Delete Book';
 
   bookDisplay.appendChild(bookTitle);
   bookDisplay.appendChild(bookAuthor);
   bookDisplay.appendChild(bookRead);
   bookDisplay.appendChild(numOfPages);
+  bookDisplay.appendChild(deleteButton);
   bookDisplay.setAttribute("data-unique-ID", newBook.uniqueID);
 
   document.body.appendChild(bookDisplay);
