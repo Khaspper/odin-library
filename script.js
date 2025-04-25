@@ -3,6 +3,7 @@ const addBookButton = document.querySelector('.add-book-button');
 const dialog = document.querySelector('dialog')
 const submitForm = document.querySelector('.submit-form');
 const form = document.querySelector('form');
+const contentWrapper = document.querySelector('.content-wrapper');
 
 function Book(title, author, numPages, read) {
   this.title = title;
@@ -39,9 +40,9 @@ function renderBook(newBook) {
   bookDisplay.appendChild(bookRead);
   bookDisplay.appendChild(numOfPages);
   bookDisplay.appendChild(deleteButton);
-  bookDisplay.setAttribute("data-unique-ID", newBook.uniqueID);
+  bookDisplay.setAttribute("data-unique-id", newBook.uniqueID);
 
-  document.body.appendChild(bookDisplay);
+  contentWrapper.appendChild(bookDisplay);
 }
 
 function addBookToLibrary(title, author, numPages, read) {
@@ -54,8 +55,6 @@ function addBookToLibrary(title, author, numPages, read) {
 // addBookToLibrary("Poopy", "Stan Lee", "200", "true");
 // addBookToLibrary("Gangsters say whaaaaat?", "Stan Lee", "50", "false");
 
-// console.log(addBookButton)
-
 addBookButton.addEventListener('click', function() {
   dialog.showModal();
 });
@@ -65,11 +64,6 @@ submitForm.addEventListener('click', function(event) {
   const input_author_name = document.querySelector('input[id="author_name"]');
   const input_number = document.querySelector('input[id="num_of_pages"]');
   const input_read = document.querySelector('input[type="radio"]:checked');
-
-  console.log(input_book_name.value);
-  console.log(input_author_name.value);
-  console.log(input_number.value);
-  console.log(input_read.value);
 
   addBookToLibrary(
     input_book_name.value, 
@@ -82,9 +76,31 @@ submitForm.addEventListener('click', function(event) {
   dialog.close();
 });
 
-//TODO: I need to use event delegation to get the book we are trying to delete
-//TODO: Then I need to use event.target.data-unique-ID (I do not know if this is the right syntax)
-//TODO: Then use a for loop that loops through the library array and finds the object with the specific data-unique-ID
-//TODO: To do the above we need to use spilce because it modifies the original array
-//TODO: While using the for loop we would need to keep track of the array index so we can use it in splice
-//TODO: Somewhere in here we need to delete it from the DOM
+// // TODO: I need to use event delegation to get the book we are trying to delete
+//? First I need to add the listener to the body
+
+// Finds the div in the 
+document.body.addEventListener('click', function(event) {
+    if (event.target.matches(".delete-book-button")) {
+      const divId = event.target.parentNode.dataset.uniqueId;
+      const deleteElement = document.querySelector(`[data-unique-id="${divId}"]`);
+      deleteElement.remove();
+      let index = 0;
+      for (index; index < myLibrary.length; index++) {
+        if (divId === myLibrary[index].uniqueID) {
+          myLibrary.splice(index, 1);
+          break;
+        }
+      }
+    }
+});
+
+
+// // TODO: Then I need to use event.target.data-unique-ID (I do not know if this is the right syntax)
+// // TODO: Then use a for loop that loops through the library array and finds the object with the specific data-unique-ID
+// // TODO: To do the above we need to use spilce because it modifies the original array
+// // TODO: While using the for loop we would need to keep track of the array index so we can use it in splice
+// // TODO: Somewhere in here we need to delete it from the DOM
+
+// addBookToLibrary("DELETE", "Stan Lee", "203", "true");
+// addBookToLibrary("Nah", "Stan Lee", "203", "true");

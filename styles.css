@@ -23,11 +23,8 @@ img {
 
 body {
   outline: auto red;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: start;
-  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
 }
 
 .book-display {
@@ -37,7 +34,7 @@ body {
   height: clamp(250px, 26vw, 300px);
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 3fr 1fr 1fr 1fr;
+  grid-template-rows: 3fr .5fr .5fr 1fr;
   grid-template-areas: 
   "book-title book-title"
   "book-author book-author"
@@ -48,12 +45,19 @@ body {
   border-radius: 10px;
 }
 
+.content-wrapper {
+  display: flex;
+  align-items: start;
+  flex-wrap: wrap;
+  margin-left: 4.5%;
+}
+
 .delete-book-button {
   grid-area: delete-book-button;
 }
 
 .book-title {
-  word-breaK:break-all;
+  word-breaK:break-word;
   grid-area: book-title;
   font-size: clamp(1.5rem, 3vw, 2rem);
 }
